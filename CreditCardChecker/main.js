@@ -22,7 +22,7 @@ const mystery5 = [4, 9, 1, 3, 5, 4, 0, 4, 6, 3, 0, 7, 2, 5, 2, 3];
 // An array of all the arrays above
 const batch = [valid1, valid2, valid3, valid4, valid5, invalid1, invalid2, invalid3, invalid4, invalid5, mystery1, mystery2, mystery3, mystery4, mystery5];
 
-//validate creditcard numbers using the Luhn algorithm
+//validate credit card numbers using the Luhn algorithm
 const validateCred = array => {
     let sum = 0;
     //Build the sum, if i is even, add the value at the current index to sum. If i is odd, multiply the value at the current index by 2; if the newNum is more than 9, subtract 9 and add to sum, otherwise; add numNum as is
@@ -39,7 +39,6 @@ const validateCred = array => {
           sum += newNum;
         } 
       }
-      console.log(sum);
       //If the sum is evenly divisible by 10, the card is valid, otherwise it's invalid
       if (sum % 10 === 0) {
         return true
@@ -49,6 +48,52 @@ const validateCred = array => {
     }
 
 
-    console.log(validateCred(invalid4));
+//Accepts an array of credit cards and pushes the invalid cards into a seperate invalidCards array
+const findInvalidCards = array => {
+    let invalidCards = [];
+    array.forEach(element => {
+        let valid = validateCred(element);
+
+        if (valid) {
+            invalidCards.push(element);
+        }
+    });
+
+    return invalidCards;
+}
  
+
+
+//Return an array that contains the companies that sold invalid credit cards, companies are identified using the first digit on the credit card
+const idInvalidCardCompanies = array => {
+    let companies = [];
+    const checkIfCompanyIsInArray = (array, string) => {
+    if (!array.includes(string)) {
+        array.push(string);
+    } 
+    return array;
+}
+    array.forEach(arr => {
+        switch (arr[0]) {
+            case 3:
+                checkIfCompanyIsInArray(companies, 'Amex (American Express)');
+                break;
+            case 4:
+                checkIfCompanyIsInArray(companies, 'Visa');
+                break;
+            case 5:
+                checkIfCompanyIsInArray(companies, 'Mastercard');
+                break;
+            case 6:
+                checkIfCompanyIsInArray(companies, 'Discover');
+                break;
+            default:
+                console.log('Company not found!');
+                
+        }
+    })
+    return companies;
+}
+
+
 
