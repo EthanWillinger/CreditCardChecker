@@ -1,4 +1,4 @@
-# Projects
+# Credit Card Checker
 
 This javascript program checks credit card validity using the [Luhn Algorithm.](https://en.wikipedia.org/wiki/Luhn_algorithm)
 
